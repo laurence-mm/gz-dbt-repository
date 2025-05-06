@@ -5,6 +5,21 @@ sources:
     tables:
       - name: sales # Alias de la table
         identifier: raw_gz_sales # nom de la table dans BigQuery
+        description: sales of Greenweez / we have on row per product_id found in each orders_id
+        columns:
+           - name: date_date
+             description: date of purchase
+           - name: orders_id
+             description: type integer
+             tests:
+              - not_null
+              - unique
+           - name: pdt_id
+             description: id du produit vendu
+           - name: revenue
+             description:  turnover for 1 unit of pdt_id
+           - name: quantity
+             description:  quantité vendue
       - name: product
         identifier: raw_gz_product
       - name: ship

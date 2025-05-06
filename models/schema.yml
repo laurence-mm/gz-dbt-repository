@@ -7,13 +7,14 @@ sources:
         identifier: raw_gz_sales # nom de la table dans BigQuery
         description: sales of Greenweez / we have on row per product_id found in each orders_id
         columns:
+           - name: pdt_id || '-' || orders_id 
+             tests:
+              - not_null
+              - unique
            - name: date_date
              description: date of purchase
            - name: orders_id
              description: type integer
-             tests:
-              - not_null
-              - unique
            - name: pdt_id
              description: id du produit vendu
            - name: revenue

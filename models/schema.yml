@@ -1,0 +1,14 @@
+version: 2 
+sources:
+  - name: raw                      # Alias du dataset
+    schema: gz_raw_data            # chemin du dataset ->schema is the name of the dataset in BigQuery
+    tables:
+      - name: sales                # Alias de la table 
+        identifier: raw_gz_sales   # nom de la table dans BigQuery
+      - name: product              
+        identifier: raw_gz_product 
+      - name: ship                 
+        identifier: raw_gz_ship             
+
+        #You can now access your sources 
+        #with {{source(’raw’, ‘sales’)}} instead of{{source(’gz_raw_data’, ‘raw_gz_sales’)}}.

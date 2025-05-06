@@ -7,7 +7,7 @@ sources:
         identifier: raw_gz_sales # nom de la table dans BigQuery
         description: sales of Greenweez / we have on row per product_id found in each orders_id
         columns:
-           - name: pdt_id || '-' || orders_id 
+           - name: pdt_id || '-' || orders_id   #PRIMARY KEY= combinaison (pdt_id - orders_id) for sales
              tests:
               - not_null
               - unique
@@ -23,8 +23,18 @@ sources:
              description:  quantité vendue
       - name: product
         identifier: raw_gz_product
+        columns:
+          - name: products_id                 #PRIMARY KEY
+            tests:
+              - not_null
+              - unique          
       - name: ship
         identifier: raw_gz_ship
+        columns:
+          - name: orders_id                 #PRIMARY KEY
+            tests:
+              - not_null
+              - unique
 
         #You can now access your sources
         #with {{source(’raw’, ‘sales’)}} instead of{{source(’gz_raw_data’, ‘raw_gz_sales’)}}.

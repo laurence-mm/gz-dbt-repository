@@ -2,6 +2,7 @@ SELECT
     sales.orders_id
     ,sales.date_date
     ,(sales.margin + sh.shipping_fee -sh.logcost -sh.ship_cost) AS operational_margin
+    ,sales.margin
     ,sales.revenue                                                      --new for finance_days 
     ,sales.quantity                                                     --new for finance_days 
     ,sales.purchase_cost                                                --new for finance_days 

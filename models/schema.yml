@@ -1,0 +1,85 @@
+version: 2
+sources:
+  - name: raw # Alias du dataset
+    schema: gz_raw_data # chemin du dataset ->schema is the name of the dataset in BigQuery
+    tables:
+      - name: sales # Alias de la table
+        identifier: raw_gz_sales # nom de la table dans BigQuery
+        description: sales of Greenweez / we have on row per product_id found in each orders_id
+        columns:
+           - name: pdt_id || '-' || orders_id   #PRIMARY KEY= combinaison (pdt_id - orders_id) for sales
+             tests:
+              - not_null
+              - unique
+           - name: date_date
+             description: date of purchase
+           - name: orders_id
+             description: type integer
+           - name: pdt_id
+             description: id du produit vendu
+           - name: revenue
+             description:  turnover for 1 unit of pdt_id
+           - name: quantity
+             description:  quantité vendue
+      - name: product
+        identifier: raw_gz_product
+        columns:
+          - name: products_id                 #PRIMARY KEY
+            tests:
+              - not_null
+              - unique          
+      - name: ship
+        identifier: raw_gz_ship
+        columns:
+          - name: orders_id                 #PRIMARY KEY
+            tests:
+              - not_null
+              - unique
+
+      #You can now access your sources
+      #with {{source(’raw’, ‘sales’)}} instead of{{source(’gz_raw_data’, ‘raw_gz_sales’)}}.
+
+#below :extending schema.yml with a models label (CHALLENGE6)
+        
+models:
+  - name: int_sales_margin
+    description: Calculating Margin per Product as per chal4_1 ,  JOIN sales & product tables
+    columns:
+ #     - name: pdt_id || '-' || orders_id   #PRIMARY KEY= combinaison (pdt_id - orders_id) for sales
+ #       tests:
+ #             - not_null                    #test after JOIN -> pas de valeurs nulles 
+ #             - unique                      #test after JOIN  -> lignes non demultipliee
+      - name: orders_id
+        description: numero de commande, NOT PRIMARY KEY
+        tests:
+          - not_null                                     
+      - name: date_date
+        description: date of the order
+        tests: 
+          - not_null
+      - name: revenue
+        tests: 
+          - not_null
+      - name: quantity
+        tests: 
+          - not_null
+
+      - name: purchase_cost
+        description: metrics calculation = quantity * purchase_price
+      - name: margin
+        description: metrics calculation = revenue - purchase_cost
+  - name: int_orders_margin
+    description: Calculating Margin per ORDER as per chal4_2 ,  aggregated by orders_id , date_date
+    columns:
+      - name: orders_id
+        description: numero de commande, NOT PRIMARY KEY
+        tests:
+          - not_null
+  - name: int_orders_operational
+    description: Calculating Operational Margin per ORDER as per chal4_3 ,  JOIN int_orders_margin et stg_raw__ship
+    columns:
+      - name: orders_id
+        description: numero de commande
+        tests:
+          - not_null                    #test PRIMARY KEY 
+          - unique                      #test PRIMARY KEY

@@ -2,7 +2,7 @@
 # Name your project! Project names should contain only lowercase characters
 # and underscores. A good package name should reflect your organization's
 # name or the intended use of these models
-name: 'my_new_project'
+name: 'Greenweez_Laurence'
 version: '1.0.0'
 config-version: 2
 
@@ -36,7 +36,12 @@ clean-targets:         # directories to be removed by `dbt clean`
 # using the `{{ config(...) }}` macro.
 
 models:
-  my_new_project:
-    # Applies to all files under models/example/
-    example:
-      +materialized: table
+  Greenweez_Laurence:       #LMA_modifier selon name donné en lgn5 
+    staging:
+      +materialized: view
+    intermediate:
+      +materialized: view
+    mart:                       #attention a bien écrire les noms du dossier (j'avais ajouté un 's')
+      +materialized: table  
+      finance:
+        +schema: 'dbt_finance'  # chemin du dataset ->schema is the name of the dataset in BigQuery     

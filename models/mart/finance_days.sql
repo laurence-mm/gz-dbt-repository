@@ -1,3 +1,5 @@
+{{config(materialized='table')}}
+
 select 
   date_date
  ,COUNT(*) AS nb_transaction

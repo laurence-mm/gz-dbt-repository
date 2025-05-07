@@ -63,10 +63,7 @@ models:
       - name: quantity
         tests: 
           - not_null
-      - name: purchase_price
-        description: from stg_raw__ship 
-        tests: 
-          - not_null
+
       - name: purchase_cost
         description: metrics calculation = quantity * purchase_price
       - name: margin

@@ -1,4 +1,4 @@
-{{config(materialized='table')}}
+--"{{config(materialized='table')}}    removed as materialized defined in dbt_projet.yml for whole project
 
 select 
   date_date

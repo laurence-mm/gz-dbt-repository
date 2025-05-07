@@ -44,4 +44,4 @@ models:
     marts:
       +materialized: table  
       finance:
-        +schema: finance  # chemin du dataset ->schema is the name of the dataset in BigQuery     
+        +schema: dbt_finance  # chemin du dataset ->schema is the name of the dataset in BigQuery     

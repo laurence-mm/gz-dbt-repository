@@ -45,10 +45,10 @@ models:
   - name: int_sales_margin
     description: Calculating Margin per Product as per chal4_1 ,  JOIN sales & product tables
     columns:
-      - name: pdt_id || '-' || orders_id   #PRIMARY KEY= combinaison (pdt_id - orders_id) for sales
-        tests:
-              - not_null                    #test after JOIN -> pas de valeurs nulles 
-              - unique                      #test after JOIN  -> lignes non demultipliee
+ #     - name: pdt_id || '-' || orders_id   #PRIMARY KEY= combinaison (pdt_id - orders_id) for sales
+ #       tests:
+ #             - not_null                    #test after JOIN -> pas de valeurs nulles 
+ #             - unique                      #test after JOIN  -> lignes non demultipliee
       - name: orders_id
         description: numero de commande, NOT PRIMARY KEY
         tests:

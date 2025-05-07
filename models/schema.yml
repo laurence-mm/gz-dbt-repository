@@ -43,6 +43,7 @@ sources:
         description: for paid_source=Bing ->campaign , cost, impressions ,clicks
       - name: raw_gz_facebook
         description: for paid_source=Facebook ->campaign , cost, impressions ,clicks
+
       #You can now access your sources
       #with {{source(’raw’, ‘sales’)}} instead of{{source(’gz_raw_data’, ‘raw_gz_sales’)}}.
 
@@ -90,3 +91,10 @@ models:
         tests:
           - not_null                    #test PRIMARY KEY 
           - unique                      #test PRIMARY KEY
+  - name: int_campaigns
+    description: compile the 4 campaigns with UNION ALL
+    columns:
+      - name: date_date || '-' || campaign_key   #PRIMARY KEY= combinaison (date_date - campaign_key) for campaigns
+        tests:
+              - not_null                    #test after UNION ALL -> pas de valeurs nulles 
+              - unique                      #test after UNION ALL  -> lignes non demultipliee

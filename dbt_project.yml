@@ -42,4 +42,6 @@ models:
     intermediate:
       +materialized: view
     marts:
-      +materialized: table        
+      +materialized: table  
+      finance:
+        +schema: dbt_finance  # chemin du dataset ->schema is the name of the dataset in BigQuery     

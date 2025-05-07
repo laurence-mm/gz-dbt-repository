@@ -16,3 +16,4 @@ SELECT
     ,ROUND(SUM(ship_cost),2) AS ship_cost
 FROM  {{ ref("finance_campaigns_day")}}
 GROUP by date_month, month_
+ORDER BY date_month DESC

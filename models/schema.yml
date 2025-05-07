@@ -74,10 +74,6 @@ models:
   - name: int_orders_margin
     description: Calculating Margin per ORDER as per chal4_2 ,  aggregated by orders_id , date_date
     columns:
-      - name: pdt_id || '-' || orders_id   #PRIMARY KEY= combinaison (pdt_id - orders_id) for sales
-        tests:
-              - not_null                    #test after JOIN -> pas de valeurs nulles 
-              - unique                      #test after JOIN  -> lignes non demultipliee
       - name: orders_id
         description: numero de commande, NOT PRIMARY KEY
         tests:
